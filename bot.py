@@ -7,8 +7,8 @@ from gpt import chat_answer
 
 bot = Bot(token=conf.BOT_TOKEN)
 dp = Dispatcher()
-client = AsyncOpenAI(
-    api_key=conf.API_KEY)
+# client = AsyncOpenAI(
+#     api_key=conf.API_KEY)
 
 
 def start():
@@ -17,20 +17,20 @@ def start():
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    topic = await client.beta.threads.create()
-    ids = topic.id
+    # topic = await client.beta.threads.create()
+    # ids = topic.id
     response = "Представься, поздоровайся и расскажи что ты умеешь?"
-    answer = await chat_answer(response, ids)
-    await message.answer(answer)
+    # answer = await chat_answer(response, ids)
+    await message.answer("answer")
 
 
-@dp.message()
-async def promt(message: types.Message):
-    topic = await client.beta.threads.create()
-    ids = topic.id
-    response = message.text
-    answer = await chat_answer(response, ids)
-    await message.answer(answer)
+# @dp.message()
+# async def promt(message: types.Message):
+#     topic = await client.beta.threads.create()
+#     ids = topic.id
+#     response = message.text
+#     answer = await chat_answer(response, ids)
+#     await message.answer(answer)
 
 
 async def main():
