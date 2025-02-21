@@ -9,7 +9,7 @@ async def chat_answer(response, ids):
         api_key=conf.API_KEY)
 
     assist_id = conf.ID_ASSIST
-    # topic = await client.beta.threads.create()
+    topic = await client.beta.threads.create()
     message = await client.beta.threads.messages.create(
         thread_id=ids,
         role="user",
