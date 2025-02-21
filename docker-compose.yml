@@ -2,4 +2,4 @@ services:
   assist:
     build:
       context: ./
-    restart: always
+  restart: always
