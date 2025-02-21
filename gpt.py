@@ -29,4 +29,3 @@ async def chat_answer(response, ids):
 
     return (f'{thread_messages.data[0].content[0].text.value.strip()}\n\n'
             f'время выполнения запроса: {datetime.now()-start}')
-
