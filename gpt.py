@@ -1,14 +1,16 @@
+import os
+from dotenv import load_dotenv
 from openai import AsyncOpenAI
 from datetime import datetime
-import conf
 
 
 async def chat_answer(response, ids):
+    load_dotenv()
     start = datetime.now()
     client = AsyncOpenAI(
-        api_key=conf.API_KEY)
+        api_key=os.getenv("API_KEY"))
 
-    assist_id = conf.ID_ASSIST
+    assist_id = os.getenv('ID_ASSIST')
     topic = await client.beta.threads.create()
     message = await client.beta.threads.messages.create(
         thread_id=ids,
@@ -28,4 +30,4 @@ async def chat_answer(response, ids):
     )
 
     return (f'{thread_messages.data[0].content[0].text.value.strip()}\n\n'
-            f'время выполнения запроса: {datetime.now()-start}')
+            f'время выполнения запроса: {datetime.now() - start}')

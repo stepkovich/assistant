@@ -1,14 +1,17 @@
+import os
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 import asyncio
 from aiogram.filters import Command
 from openai import AsyncOpenAI
-import conf
 from gpt import chat_answer
 
-bot = Bot(token=conf.BOT_TOKEN)
+load_dotenv()
+
+bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()
 client = AsyncOpenAI(
-    api_key=conf.API_KEY)
+    api_key=os.getenv('API_KEY'))
 
 
 def start():
@@ -19,7 +22,7 @@ def start():
 async def cmd_start(message: types.Message):
     topic = await client.beta.threads.create()
     ids = topic.id
-    response = "Представься, поздоровайся и расскажи что ты умеешь?"
+    response = "Поприветствуй пользователя. Представься и расскажи, что ты умеешь."
     answer = await chat_answer(response, ids)
     await message.answer(answer)
 
